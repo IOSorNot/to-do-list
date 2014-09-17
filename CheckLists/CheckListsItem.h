@@ -11,4 +11,6 @@
 @interface CheckListsItem : NSObject
 @property(nonatomic ,copy)NSString *text;
 @property(nonatomic,assign)BOOL checked;
+-(void)toggleChecked;
+
 @end

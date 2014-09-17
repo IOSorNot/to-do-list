@@ -52,29 +52,28 @@
     return 5;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"ChecklistItem"];
-    CheckListsItem * item = _items[indexPath.row];
-    UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    label.text = item.text;
-    [self configureCheckmarkForCell:cell atIndexPath:indexPath]; return cell;}
-
--(void)configureCheckmarkForCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     CheckListsItem *item = _items[indexPath.row];
+    [self configureTextForCell:cell withChecklistItem:item];
+    [self configureCheckmarkForCell:cell withChecklistItem:item];
+    return cell;
+}
+-(void)configureCheckmarkForCell:(UITableViewCell *)cell withChecklistItem:(CheckListsItem *)item{
     if(item.checked){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }else{
         cell.accessoryType = UITableViewCellAccessoryNone; }
 }
+-(void)configureTextForCell:(UITableViewCell *)cell withChecklistItem:(CheckListsItem *)item{
+    UILabel *label = (UILabel *)[cell viewWithTag:1000]; label.text = item.text;
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
-    CheckListsItem *item =_items[indexPath.row];
-    item.checked = !item.checked;
-    [self configureCheckmarkForCell:cell atIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath]; CheckListsItem *item = _items[indexPath.row];
+    [item toggleChecked];
+    [self configureCheckmarkForCell:cell withChecklistItem:item]; [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
