@@ -22,6 +22,7 @@
 		2E72FD5719C7D3BB00FFB9DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E72FD5519C7D3BB00FFB9DF /* InfoPlist.strings */; };
 		2E72FD5919C7D3BB00FFB9DF /* CheckListsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72FD5819C7D3BB00FFB9DF /* CheckListsTests.m */; };
 		2E72FD6419C82C4700FFB9DF /* CheckListsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72FD6319C82C4700FFB9DF /* CheckListsItem.m */; };
+		2ECE16B919CA7D2B00B1292B /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE16B819CA7D2B00B1292B /* AddItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		2E72FD5819C7D3BB00FFB9DF /* CheckListsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckListsTests.m; sourceTree = "<group>"; };
 		2E72FD6219C82C4700FFB9DF /* CheckListsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckListsItem.h; sourceTree = "<group>"; };
 		2E72FD6319C82C4700FFB9DF /* CheckListsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListsItem.m; sourceTree = "<group>"; };
+		2ECE16B719CA7D2B00B1292B /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
+		2ECE16B819CA7D2B00B1292B /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				2E72FD3419C7D3BA00FFB9DF /* Supporting Files */,
 				2E72FD6219C82C4700FFB9DF /* CheckListsItem.h */,
 				2E72FD6319C82C4700FFB9DF /* CheckListsItem.m */,
+				2ECE16B719CA7D2B00B1292B /* AddItemViewController.h */,
+				2ECE16B819CA7D2B00B1292B /* AddItemViewController.m */,
 			);
 			path = CheckLists;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				2E72FD4419C7D3BA00FFB9DF /* CheckListsViewController.m in Sources */,
 				2E72FD3A19C7D3BA00FFB9DF /* main.m in Sources */,
 				2E72FD3E19C7D3BA00FFB9DF /* CheckListsAppDelegate.m in Sources */,
+				2ECE16B919CA7D2B00B1292B /* AddItemViewController.m in Sources */,
 				2E72FD6419C82C4700FFB9DF /* CheckListsItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

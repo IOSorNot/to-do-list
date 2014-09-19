@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddItemViewController.h"
+@interface CheckListsViewController : UITableViewController <AddItemViewControllerDelegate>
 
-@interface CheckListsViewController : UITableViewController
+
+
+
 
 @end

@@ -31,13 +31,20 @@
     item.checked = NO;
     [_items addObject:item];
     item = [[CheckListsItem alloc]init];
-    item.text =@"了解Sony a7和MBP的最新价格"; item.checked = NO;
+    item.text =@"了解Sony a7和MBP的最新价格";
+    item.checked = NO;
     [_items addObject:item];
-    item = [[CheckListsItem alloc]init]; item.text =@"复习苍⽼老师的经典视频教程"; item.checked = NO;
+    item = [[CheckListsItem alloc]init];
+    item.text =@"复习苍⽼老师的经典视频教程";
+    item.checked = NO;
     [_items addObject:item];
-    item = [[CheckListsItem alloc]init]; item.text =@"去电影院看地⼼心引⼒力"; item.checked = NO;
+    item = [[CheckListsItem alloc]init];
+    item.text =@"去电影院看地⼼心引⼒";
+    item.checked = NO;
     [_items addObject:item];
-    item = [[CheckListsItem alloc]init]; item.text =@"看⻄西甲巴萨新败的⽐比赛回放"; item.checked = NO;
+    item = [[CheckListsItem alloc]init];
+    item.text =@"看⻄西甲巴萨新败的⽐比赛回放";
+    item.checked = NO;
     [_items addObject:item];	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -49,7 +56,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [_items count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,10 +67,14 @@
     return cell;
 }
 -(void)configureCheckmarkForCell:(UITableViewCell *)cell withChecklistItem:(CheckListsItem *)item{
-    if(item.checked){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else{
-        cell.accessoryType = UITableViewCellAccessoryNone; }
+    UILabel *label =(UILabel *)[cell viewWithTag:1001];
+    
+    if (item.checked) {
+        label.text =@"√";
+    } else {
+        label.text = @"";
+    }
+
 }
 -(void)configureTextForCell:(UITableViewCell *)cell withChecklistItem:(CheckListsItem *)item{
     UILabel *label = (UILabel *)[cell viewWithTag:1000]; label.text = item.text;
@@ -74,6 +85,48 @@
     UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath]; CheckListsItem *item = _items[indexPath.row];
     [item toggleChecked];
     [self configureCheckmarkForCell:cell withChecklistItem:item]; [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [_items removeObjectAtIndex:indexPath.row];
+    NSArray * indexPaths = @[indexPath];
+    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic ];
+    
+
+}
+
+-(void)addItemViewControllerDidCancel:(AddItemViewController *)controller{
+    
+    [self  dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+-(void)addItemViewController:(AddItemViewController *)controller didFinishAddingItem:(CheckListsItem *)item{
+    NSInteger newRowIndex = [_items count ];
+    [_items addObject:item];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
+    NSArray * indexPaths = @[indexPath];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"AddItem"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddItemViewController *controller = (AddItemViewController *)navigationController.topViewController;
+        controller.delegate= self;
+    }else if ([segue.identifier isEqualToString:@"EditItem"]){
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddItemViewController *controller =(AddItemViewController *)navigationController.topViewController;
+        controller.delegate=self;
+        NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
+        controller.itemToEdit=_items[indexPath.row];
+    }
+
 }
 
 @end
